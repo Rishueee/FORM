@@ -1,0 +1,113 @@
+import React, { useState } from "react";
+
+function App() {
+  const [firstName, setFirstName] = useState("");
+  
+  const [lastName, setLastName] = useState("");
+  
+  const [contact, setContact] = useState("");
+  
+  const [email, setEmail] = useState("");
+  
+  const [register, setregsitration] = useState("");
+  
+  const [notregistered, ifnotregistered] = useState({
+    firstName: "",lastName: "",email: "",contact: "",
+  });
+
+  const ifchanged = (e) => {
+
+    const { naam, item } = e.target;
+
+    if (naam === "firstName") {
+
+      setFirstName(item);
+
+    } else if (naam === "lastName") {
+
+      setLastName(item);
+
+    } else if (naam === "contact") {
+      setContact(item);
+
+    } else {
+      setEmail(item);
+
+    }
+  };
+
+  const data = (e) => {
+    e.preventDefault();
+    const err = {};
+
+    if (firstName === "") {
+      err.firstName = "First name is required";
+    }
+   
+    if (lastName === "") {
+      err.lastName = "Last name is required";
+    }
+    
+    if (email === "") {
+      err.email = "Email is required";
+    }
+    
+    if (contact === "") {
+      err.contact = "Contact is required";
+    
+    } else if (contact.length !== 10) {
+      err.contact = "Characters must be of 10 digits";
+    }
+
+    if (Object.keys(err).length === 0) {
+      setregsitration("Registration Successful!!");
+     
+      ifnotregistered({
+        firstName: "",lastName: "",email: "",contact: "",
+      });
+    
+      setFirstName("");setLastName("");setEmail("");setContact("");
+    } else {
+      setregsitration("");
+      ifnotregistered(err);
+    }
+  };
+
+  return (
+    <div className="container">
+    
+      <form onSubmit={data}>
+        <p className="regitered">{register}</p>
+        <div className="data">
+          <input className="inputfeild" type="text" placeholder="First Name" onChange={ifchanged} name="firstName" value={firstName}/>
+      
+          <span>{notregistered.firstName}</span>
+        </div>
+       
+       
+        <div className="data">
+        <input className="inputfeild" type="text" placeholder="Last Name" onChange={ifchanged} name="lastName" value={lastName}/>
+          <span>{notregistered.lastName}</span>
+      
+        </div>
+        
+        <div className="data">
+        <input className="inputfeild" type="email" placeholder="Enter Your Email" onChange={ifchanged} name="email" value={email}/>
+          <span>{notregistered.email}</span>
+        </div>
+        
+        <div className="data">
+        <input className="inputfeild" type="number" placeholder="Enter Your Number" onChange={ifchanged} name="contact" value={contact}/>
+          <span>{notregistered.contact}</span>
+        </div>
+        
+        <div>
+          <button className="submit" type="submit">Submit</button>
+        </div>
+      </form>
+    
+    </div>
+  );
+}
+
+export default App;
