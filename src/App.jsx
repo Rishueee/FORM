@@ -16,23 +16,16 @@ function App() {
   });
 
   const ifchanged = (e) => {
-
-    const { naam, item } = e.target;
-
-    if (naam === "firstName") {
-
-      setFirstName(item);
-
-    } else if (naam === "lastName") {
-
-      setLastName(item);
-
-    } else if (naam === "contact") {
-      setContact(item);
-
+    const { name, value } = e.target;
+  
+    if (name === "firstName") {
+      setFirstName(value);
+    } else if (name === "lastName") {
+      setLastName(value);
+    } else if (name === "contact") {
+      setContact(value);
     } else {
-      setEmail(item);
-
+      setEmail(value);
     }
   };
 
